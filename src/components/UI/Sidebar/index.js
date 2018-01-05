@@ -3,14 +3,11 @@ import {Menu, MenuItem} from 'material-ui'
 
 import "./Sidebar.css"
 
-const Sidebar = () => (
+const Sidebar = ({categories}) => (
   <div className="Sidebar">
     <Menu>
       <div className="Sidebar-Itens">
-        <MenuItem primaryText="Categoria 1"/>
-        <MenuItem primaryText="Categoria 2"/>
-        <MenuItem primaryText="Categoria 3"/>
-        <MenuItem primaryText="Categoria 4"/>
+        {categories.map((categorie) => <MenuItem key={categorie.path} primaryText={categorie.name} />)}
       </div>
     </Menu>
   </div>

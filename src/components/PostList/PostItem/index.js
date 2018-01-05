@@ -1,9 +1,9 @@
 import React from 'react'
-import {Card, CardActions, CardHeader, CardTitle, CardText} from 'material-ui/Card'
+import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import Down from 'material-ui/svg-icons/action/thumb-down'
 import Up from 'material-ui/svg-icons/action/thumb-up'
-import {stringTruncate} from '../../../utils/helpers'
+import {stringTruncate} from '../../../utils/Helpers'
 
 import "./PostItem.css"
 
