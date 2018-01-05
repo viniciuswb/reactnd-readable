@@ -4,7 +4,7 @@ import Bar from 'material-ui/AppBar'
 import './AppBar.css'
 
 const AppBar = () => {
-  const appName = 'MyReads'
+  const appName = 'Readable'
 
   return (
     <Bar
