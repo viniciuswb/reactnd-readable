@@ -1,13 +1,16 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react'
+
+import AppBar from './components/UI/AppBar'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 
 class App extends Component {
   render() {
     return (
-      <div>
-        <p>Hello</p>
-      </div>
-    );
+      <MuiThemeProvider>
+        <AppBar />
+      </MuiThemeProvider>
+    )
   }
 }
 
-export default App;
+export default App
