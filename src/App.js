@@ -7,7 +7,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <AppBar />
+        <AppBar title="Readable" />
       </MuiThemeProvider>
     )
   }

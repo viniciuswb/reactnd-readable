@@ -3,12 +3,10 @@ import Bar from 'material-ui/AppBar'
 
 import './AppBar.css'
 
-const AppBar = () => {
-  const appName = 'Readable'
-
+const AppBar = ({title}) => {
   return (
     <Bar
-      title={appName}
+      title={title}
       className="AppBar"
       showMenuIconButton={false}
     />
