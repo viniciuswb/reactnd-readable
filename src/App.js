@@ -5,7 +5,7 @@ import Aux from './hoc/Aux'
 import AppBar from './components/UI/AppBar'
 import Sidebar from './components/UI/Sidebar'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import Post from "./components/Post"
+import PostList from "./components/PostList"
 
 class App extends Component {
   render() {
@@ -14,7 +14,7 @@ class App extends Component {
         <Aux>
           <AppBar title="Readable" />
           <Sidebar />
-          <Post />
+          <PostList />
         </Aux>
       </MuiThemeProvider>
     )

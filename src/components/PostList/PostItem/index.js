@@ -4,16 +4,16 @@ import FlatButton from 'material-ui/FlatButton'
 import Down from 'material-ui/svg-icons/action/thumb-down'
 import Up from 'material-ui/svg-icons/action/thumb-up'
 
-import "./Post.css"
+import "./PostItem.css"
 
 const Post = () => (
-  <div className="Post">
+  <div className="PostItem">
     <Card>
       <CardHeader
         title="Titulo da Postagem"
         subtitle="Autor da Postagem"
       />
-      <div className="Post-Info">
+      <div className="PostItem-Info">
         Comentários: <strong>35</strong> / Score: <strong>13</strong>
       </div>
       <CardText>
@@ -26,7 +26,7 @@ const Post = () => (
         <FlatButton icon={<Up color="green"/>}/>
         <FlatButton icon={<Down color="red"/>}/>
 
-        <div className="Post-Buttons">
+        <div className="PostItem-Buttons">
           <FlatButton label="Editar"/>
           <FlatButton label="Excluir"/>
         </div>

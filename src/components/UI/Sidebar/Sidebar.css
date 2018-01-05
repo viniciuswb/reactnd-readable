@@ -1,14 +1,14 @@
 .Sidebar {
   height: 100%;
-  width: 18%;
+  width: 20%;
   background-color: #6c9bd0;
-  position: absolute;
+  position: fixed;
   top: 0;
   bottom: 0;
 }
 
 .Sidebar-Itens {
   margin-top: 64px;
-  width: 230px;
+  width: 95%;
   color: #ffffff;
 }
