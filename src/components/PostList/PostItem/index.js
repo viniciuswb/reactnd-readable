@@ -3,6 +3,7 @@ import {Card, CardActions, CardHeader, CardTitle, CardText} from 'material-ui/Ca
 import FlatButton from 'material-ui/FlatButton'
 import Down from 'material-ui/svg-icons/action/thumb-down'
 import Up from 'material-ui/svg-icons/action/thumb-up'
+import {stringTruncate} from '../../../utils/helpers'
 
 import "./PostItem.css"
 
@@ -18,7 +19,7 @@ const Post = ({title, author, comments, score, body}) => (
         <br/>
         {/*Resume of body, if has more than 140 characters trim text and add ...*/}
         <p>
-          {body}
+          {stringTruncate(body, 140)}&nbsp;
           <a className="PostItem-Link" href="#">Ver postagem</a>
         </p>
       </CardText>
