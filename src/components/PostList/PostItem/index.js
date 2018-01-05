@@ -13,14 +13,11 @@ const Post = () => (
         title="Titulo da Postagem"
         subtitle="Autor da Postagem"
       />
-      <div className="PostItem-Info">
-        Comentários: <strong>35</strong> / Score: <strong>13</strong>
-      </div>
       <CardText>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-        Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-        Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+        Comentários: <strong>35</strong> / Score: <strong>13</strong>
+        <br/>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi... <a className="PostItem-Link" href="#">Ver postagem</a></p>
       </CardText>
       <CardActions>
         <FlatButton icon={<Up color="green"/>}/>
