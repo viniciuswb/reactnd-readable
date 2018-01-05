@@ -6,18 +6,21 @@ import Up from 'material-ui/svg-icons/action/thumb-up'
 
 import "./PostItem.css"
 
-const Post = () => (
+const Post = ({title, author, comments, score, body}) => (
   <div className="PostItem">
     <Card>
       <CardHeader
-        title="Titulo da Postagem"
-        subtitle="Autor da Postagem"
+        title={title}
+        subtitle={author}
       />
       <CardText>
-        Comentários: <strong>35</strong> / Score: <strong>13</strong>
+        Comentários: <strong>{comments}</strong> / Score: <strong>{score}</strong>
         <br/>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi... <a className="PostItem-Link" href="#">Ver postagem</a></p>
+        {/*Resume of body, if has more than 140 characters trim text and add ...*/}
+        <p>
+          {body}
+          <a className="PostItem-Link" href="#">Ver postagem</a>
+        </p>
       </CardText>
       <CardActions>
         <FlatButton icon={<Up color="green"/>}/>
