@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import Down from 'material-ui/svg-icons/action/thumb-down'
@@ -33,5 +34,13 @@ const Post = ({title, author, comments, score, body}) => (
     </Card>
   </div>
 )
+
+Post.propTypes = {
+  title: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  comments: PropTypes.number.isRequired,
+  score: PropTypes.number.isRequired,
+  body: PropTypes.string.isRequired
+}
 
 export default Post

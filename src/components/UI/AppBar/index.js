@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import Bar from 'material-ui/AppBar'
 
 const AppBar = ({title}) => {
@@ -9,6 +10,10 @@ const AppBar = ({title}) => {
       showMenuIconButton={false}
     />
   )
+}
+
+AppBar.propTypes = {
+  title: PropTypes.string.isRequired
 }
 
 export default AppBar

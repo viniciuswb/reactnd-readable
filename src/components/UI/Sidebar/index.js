@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types';
 import {Menu, MenuItem} from 'material-ui'
 
 const Sidebar = ({categories}) => (
@@ -10,5 +11,9 @@ const Sidebar = ({categories}) => (
     </Menu>
   </div>
 )
+
+Sidebar.propTypes = {
+  categories: PropTypes.array.isRequired
+}
 
 export default Sidebar
