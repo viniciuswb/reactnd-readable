@@ -3,3 +3,46 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+.sidebar {
+  height: 100%;
+  width: 20%;
+  background-color: #6c9bd0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+}
+
+.sidebar-items {
+  margin-top: 64px;
+  width: 95%;
+  color: #ffffff;
+}
+
+.appbar {
+  position: fixed !important;
+  text-align: center;
+  background-color: #1e5a9f !important;
+}
+
+.postlist {
+  position: relative;
+  padding-top: 64px;
+  padding-bottom: 40px;
+  width: 80%;
+  float: right;
+}
+
+.postitem {
+  padding: 24px 24px 0;
+}
+
+.postitem-buttons {
+  float: right;
+}
+
+.postitem-link {
+  text-decoration: none;
+  color: #000;
+  font-weight: 700;
+}

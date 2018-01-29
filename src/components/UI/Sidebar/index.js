@@ -1,12 +1,10 @@
 import React from 'react'
 import {Menu, MenuItem} from 'material-ui'
 
-import "./Sidebar.css"
-
 const Sidebar = ({categories}) => (
-  <div className="Sidebar">
+  <div className="sidebar">
     <Menu>
-      <div className="Sidebar-Itens">
+      <div className="sidebar-items">
         {categories.map((categorie) => <MenuItem key={categorie.path} primaryText={categorie.name} />)}
       </div>
     </Menu>

@@ -1,10 +1,8 @@
 import React from 'react'
 import PostItem from './PostItem'
 
-import "./PostList.css"
-
 const Post = () => (
-  <div className="PostList">
+  <div className="postlist">
     <PostItem
       title="Title of Post"
       author="Author of Post"

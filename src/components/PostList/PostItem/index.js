@@ -5,10 +5,8 @@ import Down from 'material-ui/svg-icons/action/thumb-down'
 import Up from 'material-ui/svg-icons/action/thumb-up'
 import {stringTruncate} from '../../../utils/Helpers'
 
-import "./PostItem.css"
-
 const Post = ({title, author, comments, score, body}) => (
-  <div className="PostItem">
+  <div className="postitem">
     <Card>
       <CardHeader
         title={title}
@@ -20,14 +18,14 @@ const Post = ({title, author, comments, score, body}) => (
         {/*Resume of body, if has more than 140 characters trim text and add ...*/}
         <p>
           {stringTruncate(body, 140)}&nbsp;
-          <a className="PostItem-Link" href="#">Ver detalhes</a>
+          <a className="postitem-link" href="/">Ver detalhes</a>
         </p>
       </CardText>
       <CardActions>
         <FlatButton icon={<Up color="green"/>}/>
         <FlatButton icon={<Down color="red"/>}/>
 
-        <div className="PostItem-Buttons">
+        <div className="postitem-buttons">
           <FlatButton label="Editar"/>
           <FlatButton label="Excluir"/>
         </div>
