@@ -1,25 +1,22 @@
-import React, {Component} from 'react'
-
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Aux from './hoc/Aux'
-
 import AppBar from './components/UI/AppBar'
 import Sidebar from './components/UI/Sidebar'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import PostList from "./components/PostList"
-import {getCategories, getPosts} from "./utils/ReadableAPI"
+import { getPosts } from "./utils/ReadableAPI"
+import * as actions from './actions'
 
 class App extends Component {
   state = {
-    categories: null,
     posts: null
   }
 
   componentDidMount() {
-    getCategories().then(categories => {
-      this.setState({categories})
-    })
+    this.props.fetchCategories()
     getPosts().then(posts => {
-      this.setState({posts})
+      this.setState({ posts })
     })
   }
 
@@ -28,7 +25,7 @@ class App extends Component {
       <MuiThemeProvider>
         <Aux>
           <AppBar title="Readable" />
-          {this.state.categories && <Sidebar categories={this.state.categories} />}
+          {this.props.categories && <Sidebar categories={this.props.categories} />}
           {this.state.posts && <PostList posts={this.state.posts} />}
         </Aux>
       </MuiThemeProvider>
@@ -36,4 +33,8 @@ class App extends Component {
   }
 }
 
-export default App
+function mapStateToProps({ categories }) {
+  return { categories }
+}
+
+export default connect(mapStateToProps, actions)(App)
