@@ -6,16 +6,20 @@ import AppBar from './components/UI/AppBar'
 import Sidebar from './components/UI/Sidebar'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import PostList from "./components/PostList"
-import {getAll} from "./utils/CategoriesAPI"
+import {getCategories, getPosts} from "./utils/ReadableAPI"
 
 class App extends Component {
   state = {
-    categories: null
+    categories: null,
+    posts: null
   }
 
   componentDidMount() {
-    getAll().then(categories => {
+    getCategories().then(categories => {
       this.setState({categories})
+    })
+    getPosts().then(posts => {
+      this.setState({posts})
     })
   }
 
@@ -25,7 +29,7 @@ class App extends Component {
         <Aux>
           <AppBar title="Readable" />
           {this.state.categories && <Sidebar categories={this.state.categories} />}
-          <PostList />
+          {this.state.posts && <PostList posts={this.state.posts} />}
         </Aux>
       </MuiThemeProvider>
     )

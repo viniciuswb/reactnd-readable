@@ -19,7 +19,7 @@ const Post = ({title, author, comments, score, body}) => (
         {/*Resume of body, if has more than 140 characters trim text and add ...*/}
         <p>
           {stringTruncate(body, 140)}&nbsp;
-          <a className="postitem-link" href="/">Ver detalhes</a>
+          {body.length > 140 && <a className="postitem-link" href="/">Ver detalhes</a>}
         </p>
       </CardText>
       <CardActions>

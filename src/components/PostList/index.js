@@ -1,15 +1,16 @@
 import React from 'react'
 import PostItem from './PostItem'
 
-const Post = () => (
+const Post = ({posts}) => (
   <div className="postlist">
-    <PostItem
-      title="Title of Post"
-      author="Author of Post"
-      comments={8}
-      score={3}
-      body="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris quis metus efficitur, molestie ligula sed, mollis sapien. Proin ullamcorper urna sed magna mollis fermentum. Vestibulum viverra fermentum egestas. Aenean consequat, elit at pellentesque convallis, purus sapien gravida ex, commodo semper est nisl rutrum lacus. Cras gravida posuere libero. Sed ullamcorper mauris sit amet lorem placerat, eget rutrum mi vestibulum. "
-    />
+    {posts.map(post => <PostItem
+      key={post.id}
+      title={post.title}
+      author={post.author}
+      comments={post.commentCount}
+      score={post.voteScore}
+      body={post.body}
+    />)}
   </div>
 )
 
