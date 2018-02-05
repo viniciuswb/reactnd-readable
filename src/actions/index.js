@@ -1,5 +1,16 @@
-import { FETCH_CATEGORIES, FETCH_POSTS, ADD_POST } from './types'
-import { getCategories, getPosts, createPost } from "../utils/ReadableAPI"
+import { 
+  FETCH_CATEGORIES, 
+  FETCH_POSTS, 
+  ADD_POST,
+  DELETE_POST 
+} from './types'
+
+import { 
+  getCategories, 
+  getPosts, 
+  createPost,
+  removePost
+} from "../utils/ReadableAPI"
 
 export const fetchCategories = () => async dispatch => {
   try {
@@ -25,5 +36,14 @@ export const addPost = (post) => async dispatch => {
     dispatch({ type: ADD_POST, payload: res })
   } catch (error) {
     dispatch({ type: ADD_POST, payload: { error } })
+  }
+}
+
+export const deletePost = (id) => async dispatch => {
+  try {
+    const res = await removePost(id)
+    dispatch({ type: DELETE_POST, payload: res })
+  } catch (error) {
+    dispatch({ type: DELETE_POST, payload: { error } })
   }
 }

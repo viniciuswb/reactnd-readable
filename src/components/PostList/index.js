@@ -40,6 +40,7 @@ class Post extends Component {
 
   render() {
     const { posts } = this.props
+    console.log(posts)
     const actions = [
       <FlatButton
         label="Cancelar"
@@ -109,11 +110,13 @@ class Post extends Component {
 
         {posts && posts.map(post => <PostItem
           key={post.id}
+          id={post.id}
           title={post.title}
           author={post.author}
           comments={post.commentCount}
           score={post.voteScore}
           body={post.body}
+          remove={this.props.deletePost}
         />)}
       </div>
     )

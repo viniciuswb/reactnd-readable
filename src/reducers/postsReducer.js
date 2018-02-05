@@ -1,4 +1,4 @@
-import { FETCH_POSTS, ADD_POST } from '../actions/types'
+import { FETCH_POSTS, ADD_POST, DELETE_POST } from '../actions/types'
 
 export default function (state = [], action) {
   switch (action.type) {
@@ -6,6 +6,8 @@ export default function (state = [], action) {
       return  action.payload
     case ADD_POST:
       return [...state, action.payload]
+    case DELETE_POST:
+      return state.filter(post => post.id !== action.payload.id)
     default:
       return state
   }
