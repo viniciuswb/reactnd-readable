@@ -19,7 +19,7 @@ class Post extends Component {
     const actions = [
       <FlatButton
         label="Cancelar"
-        primary={true}
+        secondary={true}
         onClick={this.handleClose}
       />,
       <FlatButton
