@@ -101,7 +101,10 @@ class Post extends Component {
             value={this.state.formCategory}
             onChange={(e, i, value) => this.setState({ formCategory: value })}
           >
-            {this.props.categories.map(categorie => <MenuItem key={categorie.name} value={categorie.name} primaryText={categorie.name} />)}
+            {this.props.categories && 
+              this.props.categories.map(categorie => 
+                <MenuItem key={categorie.name} value={categorie.name} primaryText={categorie.name} />)
+            }
           </SelectField>
         </Dialog>
 
