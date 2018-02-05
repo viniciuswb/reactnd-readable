@@ -1,17 +1,42 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import moment from 'moment'
+import { createPost } from '../../utils/ReadableAPI'
 import PostItem from './PostItem'
-import {RaisedButton, FlatButton, SelectField, MenuItem, Dialog, TextField} from 'material-ui'
+import { RaisedButton, FlatButton, SelectField, MenuItem, Dialog, TextField } from 'material-ui'
 
 class Post extends Component {
   state = {
     open: false,
-    value: null
+    formTitle: '',
+    formBody: '',
+    formAuthor: '',
+    formCategory: null
   }
 
   handleOpen = () => this.setState({ open: true })
   handleClose = () => this.setState({ open: false })
-  handleCategorieChange = (event, index, value) => this.setState({value})
+
+  handleSubmit = () => {
+    const id = moment().format('hmmssYY') + Math.random().toString(36).substr(2, 8) + moment().format('DDMM')
+    const timestamp = moment().format('DD-MM-YYYY')
+    const title = this.state.formTitle
+    const body = this.state.formBody
+    const author = this.state.formAuthor
+    const category = this.state.formCategory
+
+    const post = {
+      id,
+      timestamp,
+      title,
+      category,
+      author,
+      body
+    }
+    
+    createPost(post)
+    this.handleClose()
+  }
 
   render() {
     const { posts } = this.props
@@ -26,8 +51,8 @@ class Post extends Component {
         label="Enviar"
         primary={true}
         keyboardFocused={true}
-        onClick={this.handleClose}
-      />,
+        onClick={this.handleSubmit}
+      />
     ];
 
     return (
@@ -47,30 +72,40 @@ class Post extends Component {
           <TextField
             hintText="Digite o título..."
             floatingLabelText="Título do post"
+            name="title"
             fullWidth={true}
+            value={this.state.formTitle}
+            onChange={(e) => this.setState({ formTitle: e.target.value })}
           />
           <TextField
             hintText="Escreva a postagem..."
             floatingLabelText="Corpo do post"
+            name="body"
             fullWidth={true}
             multiLine={true}
+            value={this.state.formBody}
+            onChange={(e) => this.setState({ formBody: e.target.value })}
           />
           <TextField
             hintText="Digite o autor..."
             floatingLabelText="Autor do post"
+            name="author"
             fullWidth={true}
+            value={this.state.formAuthor}
+            onChange={(e) => this.setState({ formAuthor: e.target.value })}
           />
           <SelectField
             floatingLabelText="Categoria"
             fullWidth={true}
-            value={this.state.value}
-            onChange={this.handleCategorieChange}
+            name="category"
+            value={this.state.formCategory}
+            onChange={(e, i, value) => this.setState({ formCategory: value })}
           >
             {this.props.categories.map(categorie => <MenuItem key={categorie.name} value={categorie.name} primaryText={categorie.name} />)}
           </SelectField>
         </Dialog>
 
-        {posts.map(post => <PostItem
+        {posts && posts.map(post => <PostItem
           key={post.id}
           title={post.title}
           author={post.author}
@@ -83,8 +118,8 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps({categories}) {
-  return {categories}
+function mapStateToProps({ categories }) {
+  return { categories }
 }
 
 export default connect(mapStateToProps)(Post)

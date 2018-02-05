@@ -5,7 +5,6 @@ import AppBar from './components/UI/AppBar'
 import Sidebar from './components/UI/Sidebar'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import PostList from "./components/PostList"
-import { getPosts } from "./utils/ReadableAPI"
 import * as actions from './actions'
 
 class App extends Component {

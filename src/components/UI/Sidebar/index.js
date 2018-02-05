@@ -6,7 +6,7 @@ const Sidebar = ({categories}) => (
   <div className="sidebar">
     <Menu>
       <div className="sidebar-items">
-        {categories.map((categorie) => <MenuItem key={categorie.path} primaryText={categorie.name} />)}
+        {categories && categories.map((categorie) => <MenuItem key={categorie.path} primaryText={categorie.name} />)}
       </div>
     </Menu>
   </div>
