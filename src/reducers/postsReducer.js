@@ -1,9 +1,11 @@
-import { FETCH_POSTS } from '../actions/types'
+import { FETCH_POSTS, ADD_POST } from '../actions/types'
 
-export default function (state = null, action) {
+export default function (state = [], action) {
   switch (action.type) {
     case FETCH_POSTS:
-      return action.payload
+      return  action.payload
+    case ADD_POST:
+      return [...state, action.payload]
     default:
       return state
   }

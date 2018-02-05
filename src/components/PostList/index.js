@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import moment from 'moment'
-import { createPost } from '../../utils/ReadableAPI'
+import * as actions from '../../actions'
 import PostItem from './PostItem'
 import { RaisedButton, FlatButton, SelectField, MenuItem, Dialog, TextField } from 'material-ui'
 
@@ -15,7 +15,7 @@ class Post extends Component {
   }
 
   handleOpen = () => this.setState({ open: true })
-  handleClose = () => this.setState({ open: false })
+  handleClose = () => this.setState({ open: false, formTitle: '', formBody: '', formAuthor: '', formCategory: null })
 
   handleSubmit = () => {
     const id = moment().format('hmmssYY') + Math.random().toString(36).substr(2, 8) + moment().format('DDMM')
@@ -34,13 +34,12 @@ class Post extends Component {
       body
     }
     
-    createPost(post)
+    this.props.addPost(post)
     this.handleClose()
   }
 
   render() {
     const { posts } = this.props
-
     const actions = [
       <FlatButton
         label="Cancelar"
@@ -125,4 +124,4 @@ function mapStateToProps({ categories }) {
   return { categories }
 }
 
-export default connect(mapStateToProps)(Post)
+export default connect(mapStateToProps, actions)(Post)
