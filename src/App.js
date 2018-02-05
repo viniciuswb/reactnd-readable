@@ -9,15 +9,9 @@ import { getPosts } from "./utils/ReadableAPI"
 import * as actions from './actions'
 
 class App extends Component {
-  state = {
-    posts: null
-  }
-
   componentDidMount() {
     this.props.fetchCategories()
-    getPosts().then(posts => {
-      this.setState({ posts })
-    })
+    this.props.fetchPosts()
   }
 
   render() {
@@ -26,15 +20,15 @@ class App extends Component {
         <Aux>
           <AppBar title="Readable" />
           {this.props.categories && <Sidebar categories={this.props.categories} />}
-          {this.state.posts && <PostList posts={this.state.posts} />}
+          {this.props.posts && <PostList posts={this.props.posts} />}
         </Aux>
       </MuiThemeProvider>
     )
   }
 }
 
-function mapStateToProps({ categories }) {
-  return { categories }
+function mapStateToProps({ categories, posts }) {
+  return { categories, posts }
 }
 
 export default connect(mapStateToProps, actions)(App)
