@@ -4,7 +4,6 @@ import moment from 'moment'
 import * as actions from '../../actions'
 import PostItem from './PostItem'
 import { RaisedButton, FlatButton, SelectField, MenuItem, Dialog, TextField } from 'material-ui'
-import {updatePost} from '../../utils/ReadableAPI'
 
 class Post extends Component {
   state = {
@@ -15,6 +14,14 @@ class Post extends Component {
     formId: '',
     formCategory: null,
     updating: false
+  }
+
+  componentDidMount() {
+    if (this.props.category === 'all') {
+      this.props.fetchPosts()
+    } else {
+      this.props.fetchPostsByCategory(this.props.category)
+    }
   }
 
   handleOpen = () => this.setState({ open: true })
@@ -151,8 +158,8 @@ class Post extends Component {
   }
 }
 
-function mapStateToProps({ categories }) {
-  return { categories }
+function mapStateToProps({ categories, posts }) {
+  return { categories, posts }
 }
 
 export default connect(mapStateToProps, actions)(Post)

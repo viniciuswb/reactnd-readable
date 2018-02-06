@@ -1,6 +1,7 @@
 import { 
   FETCH_CATEGORIES, 
   FETCH_POSTS, 
+  FETCH_POSTS_BY_CATEGORY,
   ADD_POST,
   UPDATE_POST,
   DELETE_POST 
@@ -9,6 +10,7 @@ import {
 import { 
   getCategories, 
   getPosts, 
+  getPostsByCategory,
   createPost,
   updatePost as update,
   removePost
@@ -29,6 +31,15 @@ export const fetchPosts = () => async dispatch => {
     dispatch({ type: FETCH_POSTS, payload: res })
   } catch (error) {
     dispatch({ type: FETCH_POSTS, payload: { error } })
+  }
+}
+
+export const fetchPostsByCategory = (category) => async dispatch => {
+  try {
+    const res = await getPostsByCategory(category)
+    dispatch({ type: FETCH_POSTS_BY_CATEGORY, payload: res })
+  } catch (error) {
+    dispatch({ type: FETCH_POSTS_BY_CATEGORY, payload: { error } })
   }
 }
 

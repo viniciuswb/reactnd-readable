@@ -1,8 +1,10 @@
-import { FETCH_POSTS, ADD_POST, UPDATE_POST, DELETE_POST } from '../actions/types'
+import { FETCH_POSTS, FETCH_POSTS_BY_CATEGORY, ADD_POST, UPDATE_POST, DELETE_POST } from '../actions/types'
 
 export default function (state = [], action) {
   switch (action.type) {
     case FETCH_POSTS:
+      return action.payload
+    case FETCH_POSTS_BY_CATEGORY:
       return action.payload
     case ADD_POST:
       return [...state, action.payload]
