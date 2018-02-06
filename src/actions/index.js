@@ -2,6 +2,7 @@ import {
   FETCH_CATEGORIES, 
   FETCH_POSTS, 
   ADD_POST,
+  UPDATE_POST,
   DELETE_POST 
 } from './types'
 
@@ -9,6 +10,7 @@ import {
   getCategories, 
   getPosts, 
   createPost,
+  updatePost as update,
   removePost
 } from "../utils/ReadableAPI"
 
@@ -36,6 +38,15 @@ export const addPost = (post) => async dispatch => {
     dispatch({ type: ADD_POST, payload: res })
   } catch (error) {
     dispatch({ type: ADD_POST, payload: { error } })
+  }
+}
+
+export const updatePost = (id, data) => async dispatch => {
+  try {
+    const res = await update(id, data)
+    dispatch({ type: UPDATE_POST, payload: res })
+  } catch (error) {
+    dispatch({ type: UPDATE_POST, payload: { error } })
   }
 }
 

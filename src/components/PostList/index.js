@@ -59,7 +59,7 @@ class Post extends Component {
     const title = this.state.formTitle
     const body = this.state.formBody
 
-    updatePost(id, {title, body})
+    this.props.updatePost(id, {title, body})
     this.handleClose()
   }
 
