@@ -27,6 +27,7 @@ const Post = ({title, author, comments, score, body, remove, id, category, edit,
         <FlatButton icon={<Down color="red"/>} onClick={() => vote(id, 'downVote')}/>
 
         <div className="postitem-buttons">
+          <FlatButton label="Ver detalhes" onClick={() => alert('detalhes da postagem')} />
           <FlatButton label="Editar" onClick={() => edit(title, body, author, category, id)} />
           <FlatButton label="Excluir" onClick={() => remove(id)}/>
         </div>
