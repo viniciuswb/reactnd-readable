@@ -70,6 +70,8 @@ class Post extends Component {
     this.handleClose()
   }
 
+  handleVotePost = (id, vote) => this.props.votePost(id, vote)
+
   render() {
     const { posts } = this.props
     const actions = [
@@ -152,6 +154,7 @@ class Post extends Component {
           body={post.body}
           remove={this.props.deletePost}
           edit={this.handleEdit}
+          vote={this.handleVotePost}
         />)}
       </div>
     )

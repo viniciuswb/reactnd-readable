@@ -4,7 +4,8 @@ import {
   FETCH_POSTS_BY_CATEGORY,
   ADD_POST,
   UPDATE_POST,
-  DELETE_POST 
+  DELETE_POST, 
+  VOTE_POST
 } from './types'
 
 import { 
@@ -13,6 +14,7 @@ import {
   getPostsByCategory,
   createPost,
   updatePost as update,
+  votePost as setVote,
   removePost
 } from "../utils/ReadableAPI"
 
@@ -67,5 +69,14 @@ export const deletePost = (id) => async dispatch => {
     dispatch({ type: DELETE_POST, payload: res })
   } catch (error) {
     dispatch({ type: DELETE_POST, payload: { error } })
+  }
+}
+
+export const votePost = (id, vote) => async dispatch => {
+  try {
+    const res = await setVote(id, vote)
+    dispatch({ type: VOTE_POST, payload: res })
+  } catch (error) {
+    dispatch({ type: VOTE_POST, payload: { error } })
   }
 }
