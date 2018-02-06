@@ -4,6 +4,7 @@ import moment from 'moment'
 import * as actions from '../../actions'
 import PostItem from './PostItem'
 import { RaisedButton, FlatButton, SelectField, MenuItem, Dialog, TextField } from 'material-ui'
+import {updatePost} from '../../utils/ReadableAPI'
 
 class Post extends Component {
   state = {
@@ -11,11 +12,26 @@ class Post extends Component {
     formTitle: '',
     formBody: '',
     formAuthor: '',
-    formCategory: null
+    formId: '',
+    formCategory: null,
+    updating: false
   }
 
   handleOpen = () => this.setState({ open: true })
-  handleClose = () => this.setState({ open: false, formTitle: '', formBody: '', formAuthor: '', formCategory: null })
+  handleClose = () => this.setState({ open: false, formTitle: '', formBody: '', formAuthor: '', formId: '', formCategory: null, updating: false })
+
+  handleEdit = (formTitle, formBody, formAuthor, formCategory, formId) => {
+    this.setState({
+      formTitle,
+      formBody,
+      formAuthor,
+      formCategory,
+      formId,
+      updating: true
+    })
+
+    this.handleOpen()
+  }
 
   handleSubmit = () => {
     const id = moment().format('hmmssYY') + Math.random().toString(36).substr(2, 8) + moment().format('DDMM')
@@ -38,9 +54,17 @@ class Post extends Component {
     this.handleClose()
   }
 
+  handleUpdate = () => {
+    const id = this.state.formId
+    const title = this.state.formTitle
+    const body = this.state.formBody
+
+    updatePost(id, {title, body})
+    this.handleClose()
+  }
+
   render() {
     const { posts } = this.props
-    console.log(posts)
     const actions = [
       <FlatButton
         label="Cancelar"
@@ -48,12 +72,12 @@ class Post extends Component {
         onClick={this.handleClose}
       />,
       <FlatButton
-        label="Enviar"
+        label={this.state.updating ? 'Salvar' : 'Enviar'}
         primary={true}
         keyboardFocused={true}
-        onClick={this.handleSubmit}
+        onClick={this.state.updating ? this.handleUpdate : this.handleSubmit}
       />
-    ];
+    ]
 
     return (
       <div className="postlist">
@@ -90,6 +114,7 @@ class Post extends Component {
             hintText="Digite o autor..."
             floatingLabelText="Autor do post"
             name="author"
+            disabled={this.state.updating ? true : false}
             fullWidth={true}
             value={this.state.formAuthor}
             onChange={(e) => this.setState({ formAuthor: e.target.value })}
@@ -98,6 +123,7 @@ class Post extends Component {
             floatingLabelText="Categoria"
             fullWidth={true}
             name="category"
+            disabled={this.state.updating ? true : false}
             value={this.state.formCategory}
             onChange={(e, i, value) => this.setState({ formCategory: value })}
           >
@@ -114,9 +140,11 @@ class Post extends Component {
           title={post.title}
           author={post.author}
           comments={post.commentCount}
+          category={post.category}
           score={post.voteScore}
           body={post.body}
           remove={this.props.deletePost}
+          edit={this.handleEdit}
         />)}
       </div>
     )

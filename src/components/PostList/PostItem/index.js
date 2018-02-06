@@ -6,7 +6,7 @@ import Down from 'material-ui/svg-icons/action/thumb-down'
 import Up from 'material-ui/svg-icons/action/thumb-up'
 import {stringTruncate} from '../../../utils/Helpers'
 
-const Post = ({title, author, comments, score, body, remove, id}) => (
+const Post = ({title, author, comments, score, body, remove, id, category, edit}) => (
   <div className="postitem">
     <Card>
       <CardHeader
@@ -27,7 +27,7 @@ const Post = ({title, author, comments, score, body, remove, id}) => (
         <FlatButton icon={<Down color="red"/>}/>
 
         <div className="postitem-buttons">
-          <FlatButton label="Editar"/>
+          <FlatButton label="Editar" onClick={() => edit(title, body, author, category, id)} />
           <FlatButton label="Excluir" onClick={() => remove(id)}/>
         </div>
       </CardActions>

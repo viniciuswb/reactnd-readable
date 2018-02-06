@@ -29,6 +29,17 @@ export const createPost = (form) =>
   })
     .then(res => res.json())
 
+export const updatePost = (id, form) =>
+  fetch(`${api}/posts/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(form)
+  })
+    .then(res => res.json())
+
 export const removePost = (id) =>
   fetch(`${api}/posts/${id}`, {
     method: 'DELETE',
