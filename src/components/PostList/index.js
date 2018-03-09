@@ -3,8 +3,9 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import * as actions from '../../actions'
 import PostItem from './PostItem'
-import { RaisedButton, FlatButton, SelectField, MenuItem, Dialog, TextField, DropDownMenu } from 'material-ui'
+import { RaisedButton, FlatButton, DropDownMenu, MenuItem } from 'material-ui'
 import _ from 'lodash'
+import Modal from '../UI/Modal';
 
 class Post extends Component {
   state = {
@@ -16,7 +17,7 @@ class Post extends Component {
     formId: '',
     formCategory: null,
     updating: false,
-    sort: 'timestamp',
+    sort: 'timestamp'
   }
 
   componentDidMount() {
@@ -90,9 +91,14 @@ class Post extends Component {
     })
   }
 
+  setTitle = (e) => this.setState({ formTitle: e.target.value })
+  setBody = (e) => this.setState({ formBody: e.target.value })
+  setAuthor = (e) => this.setState({ formAuthor: e.target.value })
+  setCategory = (e, i, value) => this.setState({ formCategory: value })
+
   render() {
     const posts = _.sortBy(this.props.posts, this.state.sort).reverse()
-    console.log(posts)
+    
     const actions = [
       <FlatButton
         label="Cancelar"
@@ -119,53 +125,23 @@ class Post extends Component {
           <MenuItem value={'voteScore'} primaryText="Ordenar por Score" />
         </DropDownMenu>
 
-        <Dialog
-          title="Criar nova postagem"
+        <Modal 
+          open={this.state.open} 
+          close={this.handleClose} 
+          title={this.state.formTitle}
+          body={this.state.formBody} 
+          author={this.state.formAuthor} 
+          category={this.state.formCategory} 
+          setTitle={this.setTitle}
+          setBody={this.setBody}
+          setAuthor={this.setAuthor}
+          setCategory={this.setCategory}
+          updating={this.state.updating}
+          categories={this.props.categories}
+          update={this.handleUpdate}
+          submit={this.handleSubmit}
           actions={actions}
-          modal={false}
-          open={this.state.open}
-          onRequestClose={this.handleClose}
-        >
-          <TextField
-            hintText="Digite o título..."
-            floatingLabelText="Título do post"
-            name="title"
-            fullWidth={true}
-            value={this.state.formTitle}
-            onChange={(e) => this.setState({ formTitle: e.target.value })}
-          />
-          <TextField
-            hintText="Escreva a postagem..."
-            floatingLabelText="Corpo do post"
-            name="body"
-            fullWidth={true}
-            multiLine={true}
-            value={this.state.formBody}
-            onChange={(e) => this.setState({ formBody: e.target.value })}
-          />
-          <TextField
-            hintText="Digite o autor..."
-            floatingLabelText="Autor do post"
-            name="author"
-            disabled={this.state.updating ? true : false}
-            fullWidth={true}
-            value={this.state.formAuthor}
-            onChange={(e) => this.setState({ formAuthor: e.target.value })}
-          />
-          <SelectField
-            floatingLabelText="Categoria"
-            fullWidth={true}
-            name="category"
-            disabled={this.state.updating ? true : false}
-            value={this.state.formCategory}
-            onChange={(e, i, value) => this.setState({ formCategory: value })}
-          >
-            {this.props.categories &&
-              this.props.categories.map(categorie =>
-                <MenuItem key={categorie.name} value={categorie.name} primaryText={categorie.name} />)
-            }
-          </SelectField>
-        </Dialog>
+        />
 
         {posts && posts.map(post => <PostItem
           key={post.id}
