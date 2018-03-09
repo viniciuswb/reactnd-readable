@@ -8,7 +8,7 @@ const Sidebar = ({categories, history}) => (
     <Menu>
       <div className="sidebar-items">
         {categories && categories.map((categorie) => 
-          <MenuItem key={categorie.path} primaryText={categorie.name} onClick={() => history.push(categorie.path)} />)}
+          <MenuItem key={categorie.path} primaryText={categorie.name} onClick={() => history.push('/' + categorie.path)} />)}
       </div>
     </Menu>
   </div>

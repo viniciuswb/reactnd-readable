@@ -7,6 +7,7 @@ import Sidebar from './components/UI/Sidebar'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import PostList from "./components/PostList"
 import * as actions from './actions'
+import PostDetail from './components/PostDetail';
 
 class App extends Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ class App extends Component {
                   <PostList category={category.name} />}
                 />)
             }
+            <Route exact path='/:category/:post_id' render={() => <PostDetail />} />
           </Aux>
         </BrowserRouter>
       </MuiThemeProvider>

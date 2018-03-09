@@ -8,6 +8,7 @@ import { RaisedButton, FlatButton, SelectField, MenuItem, Dialog, TextField } fr
 class Post extends Component {
   state = {
     open: false,
+    post_id: '',
     formTitle: '',
     formBody: '',
     formAuthor: '',
@@ -25,7 +26,15 @@ class Post extends Component {
   }
 
   handleOpen = () => this.setState({ open: true })
-  handleClose = () => this.setState({ open: false, formTitle: '', formBody: '', formAuthor: '', formId: '', formCategory: null, updating: false })
+  handleClose = () => this.setState({
+    open: false,
+    formTitle: '',
+    formBody: '',
+    formAuthor: '',
+    formId: '',
+    formCategory: null,
+    updating: false
+  })
 
   handleEdit = (formTitle, formBody, formAuthor, formCategory, formId) => {
     this.setState({
@@ -38,6 +47,14 @@ class Post extends Component {
     })
 
     this.handleOpen()
+  }
+
+  handleView = (id) => {
+    // const post = this.props.posts.find(post => post.id === id)
+    this.setState({
+      post_id: id
+    })
+    this.handleViewOpen()
   }
 
   handleSubmit = () => {
@@ -56,7 +73,7 @@ class Post extends Component {
       author,
       body
     }
-    
+
     this.props.addPost(post)
     this.handleClose()
   }
@@ -66,7 +83,7 @@ class Post extends Component {
     const title = this.state.formTitle
     const body = this.state.formBody
 
-    this.props.updatePost(id, {title, body})
+    this.props.updatePost(id, { title, body })
     this.handleClose()
   }
 
@@ -74,6 +91,10 @@ class Post extends Component {
 
   render() {
     const { posts } = this.props
+    let postView = null
+    if (this.state.view_open) {
+      postView = posts.find(post => post.id === this.state.post_id)
+    }
     const actions = [
       <FlatButton
         label="Cancelar"
@@ -136,11 +157,31 @@ class Post extends Component {
             value={this.state.formCategory}
             onChange={(e, i, value) => this.setState({ formCategory: value })}
           >
-            {this.props.categories && 
-              this.props.categories.map(categorie => 
+            {this.props.categories &&
+              this.props.categories.map(categorie =>
                 <MenuItem key={categorie.name} value={categorie.name} primaryText={categorie.name} />)
             }
           </SelectField>
+        </Dialog>
+
+        <Dialog
+          title="Detalhes"
+          modal={false}
+          open={this.state.view_open}
+          onRequestClose={this.handleClose}
+        >
+          {
+            this.state.view_open &&
+            <div>
+              <h2>{postView.title}</h2>
+              <p>{postView.body}</p>
+              <ul>
+                <li>Autor: {postView.author}</li>
+                <li>Comentários: {postView.commentCount}</li>
+                <li>Score: {postView.voteScore}</li>
+              </ul>
+            </div>
+          }
         </Dialog>
 
         {posts && posts.map(post => <PostItem
@@ -154,6 +195,7 @@ class Post extends Component {
           body={post.body}
           remove={this.props.deletePost}
           edit={this.handleEdit}
+          view={this.handleView}
           vote={this.handleVotePost}
         />)}
       </div>

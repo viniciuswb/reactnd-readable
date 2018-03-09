@@ -2,11 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
+import { withRouter } from 'react-router-dom'
 import Down from 'material-ui/svg-icons/action/thumb-down'
 import Up from 'material-ui/svg-icons/action/thumb-up'
 import {stringTruncate} from '../../../utils/Helpers'
 
-const Post = ({title, author, comments, score, body, remove, id, category, edit, vote}) => (
+const Post = ({title, author, comments, score, body, remove, id, category, edit, view, vote, history}) => (
   <div className="postitem">
     <Card>
       <CardHeader
@@ -19,7 +20,7 @@ const Post = ({title, author, comments, score, body, remove, id, category, edit,
         {/*Resume of body, if has more than 140 characters trim text and add ...*/}
         <p>
           {stringTruncate(body, 140)}&nbsp;
-          {body.length > 140 && <a className="postitem-link" href="/">Ver detalhes</a>}
+          {body.length > 140 && <a className="postitem-link" onClick={() => view(id)}>Ver detalhes</a>}
         </p>
       </CardText>
       <CardActions>
@@ -27,7 +28,7 @@ const Post = ({title, author, comments, score, body, remove, id, category, edit,
         <FlatButton icon={<Down color="red"/>} onClick={() => vote(id, 'downVote')}/>
 
         <div className="postitem-buttons">
-          <FlatButton label="Ver detalhes" onClick={() => alert('detalhes da postagem')} />
+          <FlatButton label="Ver detalhes" onClick={() => history.push(`/${category}/${id}`)} />
           <FlatButton label="Editar" onClick={() => edit(title, body, author, category, id)} />
           <FlatButton label="Excluir" onClick={() => remove(id)}/>
         </div>
@@ -44,4 +45,4 @@ Post.propTypes = {
   body: PropTypes.string.isRequired
 }
 
-export default Post
+export default withRouter(Post)

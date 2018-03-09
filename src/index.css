@@ -45,8 +45,17 @@ body {
   text-decoration: none;
   color: #000;
   font-weight: 700;
+  cursor: pointer;
 }
 
 .add-post {
   margin: 16px 24px 0px;
+}
+
+.postdetail {
+  position: relative;
+  padding-top: 64px;
+  padding-bottom: 40px;
+  width: 80%;
+  float: right;
 }
