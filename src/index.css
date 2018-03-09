@@ -52,6 +52,11 @@ body {
   margin: 16px 24px 0px;
 }
 
+.order-posts {
+  margin: 16px 24px 0px;
+  float: right;
+}
+
 .postdetail {
   position: relative;
   padding-top: 64px;

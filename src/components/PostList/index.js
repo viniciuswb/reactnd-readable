@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import * as actions from '../../actions'
 import PostItem from './PostItem'
-import { RaisedButton, FlatButton, SelectField, MenuItem, Dialog, TextField } from 'material-ui'
+import { RaisedButton, FlatButton, SelectField, MenuItem, Dialog, TextField, DropDownMenu } from 'material-ui'
+import _ from 'lodash'
 
 class Post extends Component {
   state = {
@@ -14,7 +15,8 @@ class Post extends Component {
     formAuthor: '',
     formId: '',
     formCategory: null,
-    updating: false
+    updating: false,
+    sort: 'timestamp',
   }
 
   componentDidMount() {
@@ -59,7 +61,7 @@ class Post extends Component {
 
   handleSubmit = () => {
     const id = moment().format('hmmssYY') + Math.random().toString(36).substr(2, 8) + moment().format('DDMM')
-    const timestamp = moment().format('DD-MM-YYYY')
+    const timestamp = new Date().getTime()
     const title = this.state.formTitle
     const body = this.state.formBody
     const author = this.state.formAuthor
@@ -89,12 +91,16 @@ class Post extends Component {
 
   handleVotePost = (id, vote) => this.props.votePost(id, vote)
 
+  handleSort = (event, index, value) => {
+    event.preventDefault()
+    this.setState({
+      sort: value
+    })
+  }
+
   render() {
-    const { posts } = this.props
-    let postView = null
-    if (this.state.view_open) {
-      postView = posts.find(post => post.id === this.state.post_id)
-    }
+    const posts = _.sortBy(this.props.posts, this.state.sort).reverse()
+    console.log(posts)
     const actions = [
       <FlatButton
         label="Cancelar"
@@ -115,6 +121,11 @@ class Post extends Component {
           onClick={this.handleOpen}
           label="Criar Post"
           className="add-post" />
+
+        <DropDownMenu value={this.state.sort} onChange={this.handleSort} className="order-posts">
+          <MenuItem value={'timestamp'} primaryText="Ordenar por Data" />
+          <MenuItem value={'voteScore'} primaryText="Ordenar por Score" />
+        </DropDownMenu>
 
         <Dialog
           title="Criar nova postagem"
@@ -162,26 +173,6 @@ class Post extends Component {
                 <MenuItem key={categorie.name} value={categorie.name} primaryText={categorie.name} />)
             }
           </SelectField>
-        </Dialog>
-
-        <Dialog
-          title="Detalhes"
-          modal={false}
-          open={this.state.view_open}
-          onRequestClose={this.handleClose}
-        >
-          {
-            this.state.view_open &&
-            <div>
-              <h2>{postView.title}</h2>
-              <p>{postView.body}</p>
-              <ul>
-                <li>Autor: {postView.author}</li>
-                <li>Comentários: {postView.commentCount}</li>
-                <li>Score: {postView.voteScore}</li>
-              </ul>
-            </div>
-          }
         </Dialog>
 
         {posts && posts.map(post => <PostItem
