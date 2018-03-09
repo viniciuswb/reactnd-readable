@@ -51,14 +51,6 @@ class Post extends Component {
     this.handleOpen()
   }
 
-  handleView = (id) => {
-    // const post = this.props.posts.find(post => post.id === id)
-    this.setState({
-      post_id: id
-    })
-    this.handleViewOpen()
-  }
-
   handleSubmit = () => {
     const id = moment().format('hmmssYY') + Math.random().toString(36).substr(2, 8) + moment().format('DDMM')
     const timestamp = new Date().getTime()

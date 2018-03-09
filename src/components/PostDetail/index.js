@@ -16,7 +16,7 @@ class PostDetail extends Component {
     const post = this.props.posts.find(post => post.id === this.props.match.params.post_id)
     
     return (
-      <div>
+      <div style={{paddingLeft: 40}}>
         {!this.state.loading &&
           <div className="postdetail">
             <h2>{post.title}</h2>
