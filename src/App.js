@@ -28,7 +28,7 @@ class App extends Component {
                   <PostList category={category.name} />}
                 />)
             }
-            <Route exact path='/:category/:post_id' render={() => <PostDetail />} />
+            <Route exact path='/:category/:post_id' render={() => <PostDetail delete={this.props.deletePost} />} />
           </Aux>
         </BrowserRouter>
       </MuiThemeProvider>
@@ -36,8 +36,8 @@ class App extends Component {
   }
 }
 
-function mapStateToProps({ categories }) {
-  return { categories }
+function mapStateToProps({ categories, posts }) {
+  return { categories, posts }
 }
 
 export default connect(mapStateToProps, actions)(App)

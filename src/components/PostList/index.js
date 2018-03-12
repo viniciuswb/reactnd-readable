@@ -5,7 +5,7 @@ import * as actions from '../../actions'
 import PostItem from './PostItem'
 import { RaisedButton, FlatButton, DropDownMenu, MenuItem } from 'material-ui'
 import _ from 'lodash'
-import Modal from '../UI/Modal';
+import Modal from '../UI/Modal'
 
 class Post extends Component {
   state = {
