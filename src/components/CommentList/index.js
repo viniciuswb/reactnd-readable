@@ -72,7 +72,7 @@ class CommentList extends Component {
 
         {this.props.comments
           .filter(comment => comment.deleted !== true)
-          .map((comment, index) => <CommentItem key={index} data={comment} vote={this.handleVoteComment} />)}
+          .map((comment, index) => <CommentItem key={index} data={comment} deleteComment={this.props.deleteComment} vote={this.handleVoteComment} />)}
 
         <Modal
           open={this.state.open}

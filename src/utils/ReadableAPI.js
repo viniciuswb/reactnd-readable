@@ -89,3 +89,10 @@ export const createComment = (form) =>
     body: JSON.stringify(form)
   })
   .then(res => res.json())
+
+export const removeComment = (id) =>
+  fetch(`${api}/comments/${id}`, {
+    method: 'DELETE',
+    headers
+  })
+  .then(res => res.json())

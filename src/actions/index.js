@@ -8,7 +8,8 @@ import {
   VOTE_POST,
   FETCH_COMMENTS,
   VOTE_COMMENT,
-  ADD_COMMENT
+  ADD_COMMENT,
+  DELETE_COMMENT
 } from './types'
 
 import { 
@@ -21,7 +22,8 @@ import {
   removePost,
   getPostComments,
   votePostComment,
-  createComment
+  createComment,
+  removeComment
 } from "../utils/ReadableAPI"
 
 export const fetchCategories = () => async dispatch => {
@@ -111,5 +113,14 @@ export const addComment = (comment) => async dispatch => {
     dispatch({ type: ADD_COMMENT, payload: res })
   } catch (error) {
     dispatch({ type: ADD_COMMENT, payload: { error } })
+  }
+}
+
+export const deleteComment = (id) => async dispatch => {
+  try {
+    const res = await removeComment(id)
+    dispatch({ type: DELETE_COMMENT, payload: res })
+  } catch (error) {
+    dispatch({ type: DELETE_COMMENT, payload: { error } })
   }
 }

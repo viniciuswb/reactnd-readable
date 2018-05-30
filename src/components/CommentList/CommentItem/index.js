@@ -4,7 +4,7 @@ import {FlatButton} from 'material-ui'
 import Down from 'material-ui/svg-icons/action/thumb-down'
 import Up from 'material-ui/svg-icons/action/thumb-up'
 
-const CommentItem = ({data, vote}) => (
+const CommentItem = ({data, vote, deleteComment}) => (
   <Card className="comment-item">
     <CardHeader
       title={data.author}
@@ -18,7 +18,7 @@ const CommentItem = ({data, vote}) => (
       <FlatButton icon={<Down color="red"/>} onClick={() => vote(data.id, 'downVote')}/>
       <div className="postitem-buttons">
         <FlatButton label="Editar"/>
-        <FlatButton label="Excluir"/>
+        <FlatButton label="Excluir" onClick={() => deleteComment(data.id)}/>
       </div>
     </CardActions>
   </Card>

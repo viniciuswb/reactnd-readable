@@ -1,4 +1,4 @@
-import {ADD_COMMENT, FETCH_COMMENTS, VOTE_COMMENT} from '../actions/types'
+import {ADD_COMMENT, DELETE_COMMENT, FETCH_COMMENTS, VOTE_COMMENT} from '../actions/types'
 
 export default function (state = [], action) {
   let newState = [...state]
@@ -11,6 +11,8 @@ export default function (state = [], action) {
       return newState
     case ADD_COMMENT:
       return [...state, action.payload]
+    case DELETE_COMMENT:
+      return state.filter(comment => comment.id !== action.payload.id)
     default:
       return state
   }
