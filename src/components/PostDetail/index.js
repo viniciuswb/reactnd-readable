@@ -20,7 +20,6 @@ class PostDetail extends Component {
 
   componentDidMount() {
     this.props.fetchPosts().then(() => this.setState({ loading: false }))
-    this.props.fetchComments(this.props.match.params.post_id)
   }
 
   handleOpen = () => this.setState({ open: true })
@@ -111,7 +110,7 @@ class PostDetail extends Component {
               </div>
             </div>
 
-            <CommentList comments={this.props.comments} />
+            <CommentList postId={post.id} />
 
           </Aux>
         }
@@ -120,8 +119,8 @@ class PostDetail extends Component {
   }
 }
 
-function mapStateToProps({ posts, comments }) {
-  return { posts, comments }
+function mapStateToProps({ posts }) {
+  return { posts }
 }
 
 export default withRouter(connect(mapStateToProps, actions)(PostDetail))
