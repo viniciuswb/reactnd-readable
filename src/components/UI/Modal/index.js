@@ -40,7 +40,7 @@ const Modal = ({
       value={body}
       onChange={setBody}
     />
-    <TextField
+    {author !== null && <TextField
       hintText="Digite o autor..."
       floatingLabelText="Autor do post"
       name="author"
@@ -48,8 +48,8 @@ const Modal = ({
       fullWidth={true}
       value={author}
       onChange={setAuthor}
-    />
-    <SelectField
+    /> }
+    {category !== null && <SelectField
       floatingLabelText="Categoria"
       fullWidth={true}
       name="category"
@@ -61,7 +61,7 @@ const Modal = ({
         categories.map(categorie =>
           <MenuItem key={categorie.name} value={categorie.name} primaryText={categorie.name} />)
       }
-    </SelectField>
+    </SelectField> }
   </Dialog>
 )
 

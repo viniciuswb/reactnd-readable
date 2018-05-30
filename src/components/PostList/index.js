@@ -15,7 +15,7 @@ class Post extends Component {
     formBody: '',
     formAuthor: '',
     formId: '',
-    formCategory: null,
+    formCategory: '',
     updating: false,
     sort: 'timestamp'
   }
