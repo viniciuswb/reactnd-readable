@@ -1,4 +1,4 @@
-import {ADD_COMMENT, DELETE_COMMENT, FETCH_COMMENTS, VOTE_COMMENT} from '../actions/types'
+import {ADD_COMMENT, DELETE_COMMENT, FETCH_COMMENTS, UPDATE_COMMENT, VOTE_COMMENT} from '../actions/types'
 
 export default function (state = [], action) {
   let newState = [...state]
@@ -13,6 +13,9 @@ export default function (state = [], action) {
       return [...state, action.payload]
     case DELETE_COMMENT:
       return state.filter(comment => comment.id !== action.payload.id)
+    case UPDATE_COMMENT:
+      newState.splice(newState.findIndex(comment => comment.id === action.payload.id), 1, action.payload)
+      return newState
     default:
       return state
   }

@@ -96,3 +96,14 @@ export const removeComment = (id) =>
     headers
   })
   .then(res => res.json())
+
+export const updateComment = (id, form) =>
+  fetch(`${api}/comments/${id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(form)
+  })
+  .then(res => res.json())

@@ -10,6 +10,7 @@ class CommentList extends Component {
   state = {
     open: false,
     updating: false,
+    formId: '',
     formBody: '',
     formAuthor: ''
   }
@@ -19,6 +20,12 @@ class CommentList extends Component {
   }
 
   handleOpen = () => this.setState({ open: true })
+  handleOpenUpdate = (cId, cBody) => this.setState({
+    open: true,
+    updating: true,
+    formId: cId,
+    formBody: cBody
+  })
   handleClose = () => this.setState({ open: false, formTitle: '', formBody: '', formAuthor: '' })
 
   handleSubmit = () => {
@@ -39,7 +46,15 @@ class CommentList extends Component {
     this.props.addComment(comment)
     this.handleClose()
   }
-  handleUpdate = () => alert('update')
+
+  handleUpdate = () => {
+    const id = this.state.formId
+    const timestamp = new Date().getTime()
+    const body = this.state.formBody
+
+    this.props.updateComment(id, { timestamp, body })
+    this.handleClose()
+  }
 
   setBody = (e) => this.setState({ formBody: e.target.value })
   setAuthor = (e) => this.setState({ formAuthor: e.target.value })
@@ -72,14 +87,20 @@ class CommentList extends Component {
 
         {this.props.comments
           .filter(comment => comment.deleted !== true)
-          .map((comment, index) => <CommentItem key={index} data={comment} deleteComment={this.props.deleteComment} vote={this.handleVoteComment} />)}
+          .map((comment, index) => <CommentItem
+            key={index}
+            data={comment}
+            deleteComment={this.props.deleteComment}
+            vote={this.handleVoteComment}
+            updateComment={this.handleOpenUpdate}
+          />)}
 
         <Modal
           open={this.state.open}
           close={this.handleClose}
           title={null}
           body={this.state.formBody}
-          author={this.state.formAuthor}
+          author={this.state.updating ? null : this.state.formAuthor}
           category={null}
           setTitle={this.setTitle}
           setBody={this.setBody}
