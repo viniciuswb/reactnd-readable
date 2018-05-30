@@ -141,6 +141,7 @@ class Post extends Component {
           update={this.handleUpdate}
           submit={this.handleSubmit}
           actions={actions}
+          modalTitle={this.state.updating ? 'Editar postagem' : 'Criar nova postagem'}
         />
 
         {posts && posts.map(post => <PostItem

@@ -14,10 +14,11 @@ const Modal = ({
   setCategory, 
   updating, 
   categories, 
-  actions
+  actions,
+  modalTitle
 }) => (
   <Dialog
-    title="Criar nova postagem"
+    title={modalTitle}
     actions={actions}
     modal={false}
     open={open}
@@ -25,7 +26,7 @@ const Modal = ({
   >
     <TextField
       hintText="Digite o título..."
-      floatingLabelText="Título do post"
+      floatingLabelText="Título"
       name="title"
       fullWidth={true}
       value={title}
@@ -33,7 +34,7 @@ const Modal = ({
     />
     <TextField
       hintText="Escreva a postagem..."
-      floatingLabelText="Corpo do post"
+      floatingLabelText="Corpo"
       name="body"
       fullWidth={true}
       multiLine={true}
@@ -42,7 +43,7 @@ const Modal = ({
     />
     {author !== null && <TextField
       hintText="Digite o autor..."
-      floatingLabelText="Autor do post"
+      floatingLabelText="Autor"
       name="author"
       disabled={updating ? true : false}
       fullWidth={true}

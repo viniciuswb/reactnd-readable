@@ -52,6 +52,10 @@ body {
   margin: 16px 24px 0px;
 }
 
+.add-comment {
+  margin: 0;
+}
+
 .order-posts {
   margin: 16px 24px 0px;
   float: right;

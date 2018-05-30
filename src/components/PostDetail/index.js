@@ -91,6 +91,7 @@ class PostDetail extends Component {
           updating={true}
           categories={null}
           actions={actions}
+          modalTitle="Editar postagem"
         />
         {!this.state.loading &&
           <Aux>
