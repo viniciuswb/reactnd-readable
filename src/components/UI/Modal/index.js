@@ -24,15 +24,15 @@ const Modal = ({
     open={open}
     onRequestClose={close}
   >
-    <TextField
+    {title !== null && <TextField
       hintText="Digite o título..."
       floatingLabelText="Título"
       name="title"
       fullWidth={true}
       value={title}
       onChange={setTitle}
-    />
-    <TextField
+    />}
+    {body !== null && <TextField
       hintText="Escreva a postagem..."
       floatingLabelText="Corpo"
       name="body"
@@ -40,7 +40,7 @@ const Modal = ({
       multiLine={true}
       value={body}
       onChange={setBody}
-    />
+    />}
     {author !== null && <TextField
       hintText="Digite o autor..."
       floatingLabelText="Autor"

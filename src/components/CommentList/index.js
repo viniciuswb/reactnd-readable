@@ -4,12 +4,12 @@ import { connect } from 'react-redux'
 import * as actions from "../../actions"
 import { RaisedButton, FlatButton } from 'material-ui'
 import Modal from '../UI/Modal'
+import moment from "moment/moment"
 
 class CommentList extends Component {
   state = {
     open: false,
     updating: false,
-    formTitle: '',
     formBody: '',
     formAuthor: ''
   }
@@ -19,12 +19,28 @@ class CommentList extends Component {
   }
 
   handleOpen = () => this.setState({ open: true })
-  handleClose = () => this.setState({ open: false })
+  handleClose = () => this.setState({ open: false, formTitle: '', formBody: '', formAuthor: '' })
 
-  handleSubmit = () => alert('submit')
+  handleSubmit = () => {
+    const id = moment().format('hmmssYY') + Math.random().toString(36).substr(2, 8) + moment().format('DDMM')
+    const timestamp = new Date().getTime()
+    const body = this.state.formBody
+    const author = this.state.formAuthor
+    const parentId = this.props.postId
+
+    const comment = {
+      id,
+      timestamp,
+      body,
+      author,
+      parentId
+    }
+
+    this.props.addComment(comment)
+    this.handleClose()
+  }
   handleUpdate = () => alert('update')
 
-  setTitle = (e) => this.setState({ formTitle: e.target.value })
   setBody = (e) => this.setState({ formBody: e.target.value })
   setAuthor = (e) => this.setState({ formAuthor: e.target.value })
 
@@ -61,7 +77,7 @@ class CommentList extends Component {
         <Modal
           open={this.state.open}
           close={this.handleClose}
-          title={this.state.formTitle}
+          title={null}
           body={this.state.formBody}
           author={this.state.formAuthor}
           category={null}
