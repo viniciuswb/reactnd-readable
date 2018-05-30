@@ -10,7 +10,7 @@ const CommentItem = ({data}) => (
       title={data.author}
     />
     <CardText>
-      Score: <strong>{data.score}</strong><br />
+      Score: <strong>{data.voteScore}</strong><br />
       <p>{data.body}</p>
     </CardText>
     <CardActions>

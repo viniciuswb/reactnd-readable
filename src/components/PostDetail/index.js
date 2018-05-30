@@ -110,7 +110,7 @@ class PostDetail extends Component {
               </div>
             </div>
 
-            <CommentList />
+            <CommentList postId={post.id} />
 
           </Aux>
         }
