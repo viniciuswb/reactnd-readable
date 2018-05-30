@@ -105,8 +105,8 @@ class PostDetail extends Component {
               <FlatButton icon={<Up color="green" />} style={{float: 'left'}} onClick={() => this.vote(post.id, 'upVote')} />
               <FlatButton icon={<Down color="red" />} style={{float: 'left'}} onClick={() => this.vote(post.id, 'downVote')} />
               <div>
-                <FlatButton label="Editar" style={{float: 'right'}} onClick={() => this.edit(post.id, post.title, post.body)} />
                 <FlatButton label="Excluir" style={{float: 'right'}} onClick={() => this.delete(post.id)} />
+                <FlatButton label="Editar" style={{float: 'right'}} onClick={() => this.edit(post.id, post.title, post.body)} />
               </div>
             </div>
 
