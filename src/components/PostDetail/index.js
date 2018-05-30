@@ -3,11 +3,11 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import * as actions from '../../actions'
 import { FlatButton } from 'material-ui'
-import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card'
 import Down from 'material-ui/svg-icons/action/thumb-down'
 import Up from 'material-ui/svg-icons/action/thumb-up'
 import Aux from '../../hoc/Aux'
 import Modal from '../UI/Modal'
+import CommentList from '../CommentList'
 
 class PostDetail extends Component {
   state = {
@@ -109,40 +109,9 @@ class PostDetail extends Component {
                 <FlatButton label="Excluir" style={{float: 'right'}} onClick={() => this.delete(post.id)} />
               </div>
             </div>
-            <div style={{ width: '75%', float: 'right', paddingBottom: 40, paddingRight: '5%' }}>
-              <h2>Comentários</h2>
-              <Card style={{marginBottom: 40}}>
-                <CardHeader
-                  title="Autor do Comentário"
-                />
-                <CardText>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                  Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                  Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-                </CardText>
-                <CardActions>
-                  <FlatButton label="Action1" />
-                  <FlatButton label="Action2" />
-                </CardActions>
-              </Card>
 
-              <Card style={{marginBottom: 40}}>
-                <CardHeader
-                  title="Autor do Comentário"
-                />
-                <CardText>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
-                  Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
-                  Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-                </CardText>
-                <CardActions>
-                  <FlatButton label="Action1" />
-                  <FlatButton label="Action2" />
-                </CardActions>
-              </Card>
-            </div>
+            <CommentList />
+
           </Aux>
         }
       </div>
