@@ -8,6 +8,7 @@ import Up from 'material-ui/svg-icons/action/thumb-up'
 import Aux from '../../hoc/Aux'
 import Modal from '../UI/Modal'
 import CommentList from '../CommentList'
+import Error404 from '../UI/Errors/Error404'
 
 class PostDetail extends Component {
   state = {
@@ -74,6 +75,10 @@ class PostDetail extends Component {
         onClick={this.update}
       />
     ]
+
+    if (!post) {
+      return <Error404 />;
+    }
 
     return (
       <div style={{ paddingLeft: 40 }}>
